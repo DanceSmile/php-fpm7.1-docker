@@ -13,6 +13,11 @@ RUN apt-get update && apt-get install -y \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && rm -rf /var/lib/apt/lists/* 
 
+
+
+RUN  pecl install redis-4.0.1 \
+    && docker-php-ext-enable redis 
+
 # RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
 #    tar -zxvf swoole* && cd swoole* && \
