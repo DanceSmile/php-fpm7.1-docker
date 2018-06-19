@@ -1,4 +1,4 @@
-FROM php:7.1-fpm
+FROM php:5.6-fpm
 RUN apt-get update && apt-get install -y \
         zip \
         unzip \
@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install pdo_mysql mcrypt mbstring  json pdo_mysql mysqli  iconv  pcntl  posix opcache \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
-    && rm -rf /var/lib/apt/lists/*
+    && pecl install redis-4.0.1 && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
+    && rm -rf /var/lib/apt/lists/* 
 
 # RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
