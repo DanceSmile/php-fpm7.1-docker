@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
 # RUN docker-php-ext-enable swoole
 
 RUN pecl install mongodb && \
-docker-php-ext-enable mongodb
+    docker-php-ext-enable mongodb
 
 COPY ./php.ini /usr/local/etc/php/conf.d
 WORKDIR /mnt/application
