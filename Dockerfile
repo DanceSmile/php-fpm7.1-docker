@@ -18,9 +18,7 @@ RUN apt-get update && apt-get install -y \
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
- 
-RUN pecl install -o -f oauth mongodb amqp-1.8.0 \
-    && rm -rf /tmp/pear
+
 
 RUN docker-php-ext-enable mongodb oauth amqp
     
