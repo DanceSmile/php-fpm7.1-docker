@@ -21,7 +21,6 @@ RUN apt-get update && apt-get install -y \
 
 COPY etc/gearman-2.0.3.tar.gz  /tmp/
 
-RUN docker-php-ext-configure intl
 RUN docker-php-ext-install zip  mcrypt bcmath pdo_mysql intl opcache
 
 RUN cd /tmp/ && tar xvf gearman-2.0.3.tar.gz && cd pecl-gearman-gearman-2.0.3 && phpize && ./configure && make && make install && echo "extension=gearman.so" > /usr/local/etc/php/conf.d/gearman.ini
