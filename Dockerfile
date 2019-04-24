@@ -15,6 +15,10 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis-4.0.1 && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && rm -rf /var/lib/apt/lists/* 
 
+
+RUN pecl install channel://pecl.php.net/mongodb-1.5.3 && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+RUN pecl install uuid &&  echo "extension=uuid.so" > /usr/local/etc/php/conf.d/uuid.ini
+
 # RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
 #    tar -zxvf swoole* && cd swoole* && \
@@ -28,6 +32,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
+
 
 
 
