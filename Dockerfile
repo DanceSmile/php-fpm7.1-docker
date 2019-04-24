@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && pecl install redis-4.0.1 && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     #&& pecl install uuid &&  echo "extension=uuid.so" > /usr/local/etc/php/conf.d/uuid.ini \
-    && pecl install channel://pecl.php.net/mongodb-1.5.3 && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
     && rm -rf /var/lib/apt/lists/* 
 
 COPY etc/gearman-2.0.3.tar.gz  /tmp/
@@ -24,6 +23,12 @@ COPY etc/gearman-2.0.3.tar.gz  /tmp/
 RUN docker-php-ext-install zip  mcrypt bcmath pdo_mysql intl opcache
 
 RUN cd /tmp/ && tar xvf gearman-2.0.3.tar.gz && cd pecl-gearman-gearman-2.0.3 && phpize && ./configure && make && make install && echo "extension=gearman.so" > /usr/local/etc/php/conf.d/gearman.ini
+
+
+RUN pecl install -o -f oauth mongodb amqp-1.8.0 \
+    && rm -rf /tmp/pear
+
+RUN docker-php-ext-enable mongodb oauth amqp
 
 
 # RUN pecl install swoole
