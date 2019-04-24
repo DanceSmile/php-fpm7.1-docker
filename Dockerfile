@@ -1,6 +1,8 @@
 FROM php:7.1-fpm
 
 RUN apt-get update && apt-get install -y \
+        libgearman-dev \
+        libmemcached-dev \
         zip \
         unzip \
         libfreetype6-dev \
@@ -15,9 +17,16 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis-4.0.1 && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && rm -rf /var/lib/apt/lists/* 
 
+COPY etc/gearman-2.0.3.tar.gz  /tmp/
 
 RUN pecl install channel://pecl.php.net/mongodb-1.5.3 && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 RUN pecl install uuid &&  echo "extension=uuid.so" > /usr/local/etc/php/conf.d/uuid.ini
+
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-install zip  mcrypt bcmath pdo_mysql intl opcache
+
+RUN cd /tmp/ && tar xvf gearman-2.0.3.tar.gz && cd pecl-gearman-gearman-2.0.3 && phpize && ./configure && make && make install && echo "extension=gearman.so" > /usr/local/etc/php/conf.d/gearman.ini
+
 
 # RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
