@@ -23,5 +23,13 @@ RUN apt-get update && apt-get install -y \
 #    make && make install
 # RUN docker-php-ext-enable swoole
 
+# Composer
+# ADD etc/composer /usr/local/bin/composer
+
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer
+
+
+
 COPY ./php.ini /usr/local/etc/php/conf.d
 WORKDIR /mnt/application
