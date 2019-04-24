@@ -15,13 +15,6 @@ RUN apt-get update && apt-get install -y \
     && pecl install redis-4.0.1 && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     && rm -rf /var/lib/apt/lists/* 
 
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
-
-
-RUN docker-php-ext-enable mongodb oauth amqp
-    
 # RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
 #    tar -zxvf swoole* && cd swoole* && \
@@ -32,4 +25,3 @@ RUN docker-php-ext-enable mongodb oauth amqp
 
 COPY ./php.ini /usr/local/etc/php/conf.d
 WORKDIR /mnt/application
-
