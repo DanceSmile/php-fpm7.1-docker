@@ -28,8 +28,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mcrypt zip bcmath intl  pdo_mysql  mbstring  json pdo_mysql mysqli  iconv  pcntl  posix opcache \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && pecl install redis-4.0.1 \
-    && pecl install mongodb gearman \
-    && docker-php-ext-enable redis mongodb gearman  \
+    && pecl install mongodb gearman swoole \
+    && docker-php-ext-enable redis mongodb gearman swoole  \
     && rm -rf /var/lib/apt/lists/*
     
     
