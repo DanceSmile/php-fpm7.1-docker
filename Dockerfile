@@ -31,6 +31,11 @@ RUN apt-get update && apt-get install -y \
     && pecl install mongodb \
     && docker-php-ext-enable redis mongodb  \
     && rm -rf /var/lib/apt/lists/*
+    
+    
+    RUN pecl install uuid &&  echo "extension=uuid.so" > /usr/local/etc/php/conf.d/uuid.ini
+
+    RUN pecl install yaml-2.0.0 && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/yaml.ini
 
 
 
