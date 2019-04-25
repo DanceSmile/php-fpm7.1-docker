@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) iconv  \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-install pdo_mysql mcrypt mbstring  json pdo_mysql mysqli  iconv  pcntl  posix opcache \
+    && docker-php-ext-install intl pdo_mysql mcrypt mbstring  json pdo_mysql mysqli  iconv  pcntl  posix opcache \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && pecl install redis-4.0.1 \
     && pecl install mongodb \
