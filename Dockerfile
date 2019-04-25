@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install pdo_mysql mcrypt mbstring  json pdo_mysql mysqli  iconv  pcntl  posix opcache \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && pecl install redis-4.0.1 \
-    && docker-php-ext-enable redis  \
+    && pecl install mongodb \
+    && docker-php-ext-enable redis mongodb  \
     && rm -rf /var/lib/apt/lists/*
 
 
