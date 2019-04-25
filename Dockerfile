@@ -22,18 +22,13 @@ RUN apt-get update && apt-get install -y \
 
 
 
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/compose
-
-
-#RUN pecl install swoole
+# RUN pecl install swoole
 # RUN cd /root && pecl download swoole && \
 #    tar -zxvf swoole* && cd swoole* && \
 #    phpize && \
 #    ./configure  && \
 #    make && make install
-#RUN docker-php-ext-enable swoole
+# RUN docker-php-ext-enable swoole
 
 # Composer
 # ADD etc/composer /usr/local/bin/composer
