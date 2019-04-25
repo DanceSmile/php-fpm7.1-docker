@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
         libmemcached-dev \
         zip \
         unzip \
+        git \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
