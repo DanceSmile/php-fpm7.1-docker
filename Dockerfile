@@ -3,6 +3,7 @@ FROM php:7.1-fpm
 RUN apt-get update && apt-get install -y \
         libgearman-dev \
         libmemcached-dev \
+        git \
         zip \
         unzip \
         libfreetype6-dev \
@@ -16,7 +17,8 @@ RUN apt-get update && apt-get install -y \
     && echo "opcache.enable_cli=0" >>  /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && pecl install redis-4.0.1 \
     && pecl install mongodb \
-    && docker-php-ext-enable redis mongodb  \
+    && pecl install uuid \
+    && docker-php-ext-enable redis mongodb uuid  \
     && rm -rf /var/lib/apt/lists/*
 
 
