@@ -37,6 +37,9 @@ RUN apt-get update && apt-get install -y \
     RUN pecl install uuid &&  echo "extension=uuid.so" > /usr/local/etc/php/conf.d/uuid.ini
 
     RUN pecl install yaml-2.0.0 && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/yaml.ini
+    
+    RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 
 
 
