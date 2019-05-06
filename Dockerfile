@@ -38,9 +38,10 @@ RUN apt-get update && apt-get install -y \
 
     RUN pecl install yaml-2.0.0 && echo "extension=yaml.so" > /usr/local/etc/php/conf.d/yaml.ini
     
-    RUN pecl install xdebug && docker-php-ext-enable xdebug
+#     RUN pecl install xdebug && docker-php-ext-enable xdebug
 
-
+    COPY etc/gearman-2.0.3.tar.gz  /tmp/
+    RUN cd /tmp/ && tar xvf gearman-2.0.3.tar.gz && cd pecl-gearman-gearman-2.0.3 && phpize && ./configure && make && make install && echo "extension=gearman.so" > /usr/local/etc/php/conf.d/gearman.ini
 
 
 
